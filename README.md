@@ -3,7 +3,7 @@ mugsy
 
 Mugsy is a file integrity monitor.  
 
-It runs as a daemon and any file modifications made to your system is logged locally and also sent to an [elasticsearch](http://www.elasticsearch.org) server.  That means you can use [kibana](http://www.elasticsearch.org/overview/kibana/) as a sweet dashboard to monitor what is changing on your servers, or easily roll your own reports.
+It runs as a daemon and any file modifications made to your system are logged locally and also sent to an [elasticsearch](http://www.elasticsearch.org) server.  That means you can use [kibana](http://www.elasticsearch.org/overview/kibana/) as a sweet dashboard to monitor what is changing on your servers, or easily roll your own reports.
 
 #### Install
 
