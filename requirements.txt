@@ -1,0 +1,11 @@
+PyXML==0.8.4
+PyYAML==3.10
+argh==0.24.1
+argparse==1.2.1
+cx-Freeze==4.3.2
+elasticsearch==0.4.4
+lockfile==0.9.1
+pathtools==0.1.2
+python-daemon==1.6
+urllib3==1.7.1
+watchdog==0.7.0

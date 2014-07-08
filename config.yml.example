@@ -1,0 +1,40 @@
+# config.yml
+# Mugsy configuration
+
+# Elasticsearch server
+es_host: eshost.example.com
+es_port: 9200
+
+# Logs
+logdir: /var/mugsy/logs
+loglevel: info
+
+# directories to monitor
+# note: no single file paths, only specify directories here
+path_list:
+- /boot
+- /lib
+- /lib64
+- /sys
+- /bin
+- /sbin
+- /usr/bin
+- /usr/sbin
+- /usr/local/bin
+- /usr/local/etc
+- /usr/local/sbin
+- /etc
+
+# patterns to ignore
+ignore_list:
+- /etc/mtab*
+- /sys/devices*
+- /etc/prelink.cache*
+- "*.swpx"
+- "*.swp"
+- "*.swx"
+- "*.svn*"
+- "*.svn/*"
+- "*.svn/tmp*"
+- /etc/pki/nssdb/key*
+- /etc/pki/nssdb/cert*
