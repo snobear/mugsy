@@ -9,9 +9,6 @@ version = os.environ['MUGSY_VER']
 # module dependencies to package up
 packages = ['watchdog','elasticsearch','yaml','daemon','fcntl']
 
-# other files to include
-includefiles = ['pid.py']
-
 setup(
     name = 'mugsy',
     version = version,
