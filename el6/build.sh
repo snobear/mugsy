@@ -12,7 +12,7 @@ export MUGSY_VER=${1}
 packagedir=${HOME}/mugsy-pkg
 
 # do work
-cd /home/zzjason/mugsy
+cd ${HOME}/mugsy
 echo "Deleting pyc files..."
 find . -name "*.pyc" -exec rm -rf {} \;
 source bin/activate
@@ -33,13 +33,12 @@ sudo cp -r lib/mugsy-${1} ${packagedir}/var/mugsy/lib
 
 echo "Copying misc files to package directory..."
 sudo cp config.yml.example ${packagedir}/var/mugsy/
-sudo cp init.sh ${packagedir}/var/mugsy/lib/
-sudo cp mugsy.init.d ${packagedir}/etc/init.d/mugsy
+sudo cp el6/init.sh ${packagedir}/var/mugsy/lib/
+sudo cp el6/mugsy.init.d ${packagedir}/etc/init.d/mugsy
 
 # set strict owner and perms that the rpm package should take on
 sudo chmod 700 ${packagedir} -R
 sudo chown root:root ${packagedir} -R
 
-#sudo yumify --no-upload --source ${packagedir} --rpm-name mugsy --ver ${1} --after-install ${packagedir}/lib/init.sh
 echo "Packaging into an rpm..."
 sudo /usr/bin/fpm --rpm-use-file-permissions --after-install /var/mugsy/lib/init.sh -s dir -t rpm --package ${HOME} --no-auto-depends -n mugsy -v ${1} -C ${packagedir} var/mugsy/lib/ var/mugsy/config.yml.example etc/init.d/mugsy
