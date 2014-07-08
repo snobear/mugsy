@@ -13,7 +13,7 @@ yum install mugsy
 
 #### Setup and run
 
-Mugsy ships with an example config that should have some sane defaults.
+Mugsy ships with an example config that should have some sane defaults as far as what directories should be monitored and ignored.
 
 ```
 sudo cp /var/mugsy/config.yml.example /var/mugsy/config.yml
@@ -43,7 +43,8 @@ python mugsy.py start
 #### Notes
 
 - inotify is used to detect real-time file changes via [py watchdog](https://pypi.python.org/pypi/watchdog)
-- mugsy is a stand-alone executable.  Your system does not need to have python installed for it to run, thanks to [cx_freeze](http://cx-freeze.sourceforge.net/).  So theoretically, mugsy could be built for cross-platform use.
+- The list of directories to monitor in the example config should not be considered complete from a security perspective.  You should monitor ALL directories on your system, but this can get noisy.  Please submit an issue to suggest any changes to the default list.
+- Mugsy is a stand-alone executable.  Your system does not need to have python installed for it to run, thanks to [cx_freeze](http://cx-freeze.sourceforge.net/).  So theoretically, mugsy could be built for cross-platform use.
 
 #### Contributing
 Pull requests, bug reports, and feature requests are encouraged.
