@@ -7,6 +7,8 @@ It runs as a daemon and any file modifications made to your system are logged lo
 
 #### Install
 
+(rpm is forthcoming.  Just need to find a public yum repo to serve it from)
+
 ```
 yum install mugsy
 ```
