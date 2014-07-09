@@ -1,7 +1,7 @@
 mugsy
 ======
 
-Mugsy is a file integrity monitor.  
+Mugsy is a file integrity monitor.
 
 It runs as a daemon and any file modifications made to your system are logged locally and also sent to an [elasticsearch](http://www.elasticsearch.org) server.  That means you can use [kibana](http://www.elasticsearch.org/overview/kibana/) as a sweet dashboard to monitor what is changing on your servers, or easily roll your own reports.
 
@@ -10,21 +10,7 @@ It runs as a daemon and any file modifications made to your system are logged lo
 (rpm is forthcoming.  Just need to find a public yum repo to serve it from)
 
 ```
-yum install mugsy
-```
-
-#### Setup and run
-
-Mugsy ships with an example config that should have some sane defaults as far as what directories should be monitored and ignored.
-
-```
-sudo cp /var/mugsy/config.yml.example /var/mugsy/config.yml
-
-# at a minimum, you'll need to change es_host and es_port to your ES host/port.
-sudo vim /var/mugsy/config.yml
-
-# start the daemon
-sudo service mugsy start
+sudo yum install mugsy
 ```
 
 #### Install via github
@@ -37,6 +23,64 @@ pip install -r requirements.txt
 python mugsy.py start
 ```
 
+#### Setup and run
+
+Copy the example config:
+
+```
+sudo cp /var/mugsy/config.yml.example /var/mugsy/config.yml
+```
+
+At a minimum, you'll need to change the elasticsearch host/port.
+
+
+Start the daemon:
+
+```
+sudo service mugsy start
+```
+
+#### Example config
+
+```
+# Elasticsearch server
+es_host: eshost.example.com
+es_port: 9200
+
+# Logs
+logdir: /var/mugsy/logs
+loglevel: info
+
+# directories to monitor
+# note: no single file paths, only specify directories here
+path_list:
+- /boot
+- /lib
+- /lib64
+- /sys
+- /bin
+- /sbin
+- /usr/bin
+- /usr/sbin
+- /usr/local/bin
+- /usr/local/etc
+- /usr/local/sbin
+- /etc
+
+# patterns to ignore
+ignore_list:
+- /etc/mtab*
+- /sys/devices*
+- /etc/prelink.cache*
+- "*.swpx"
+- "*.swp"
+- "*.swx"
+- "*.git*"
+- "*.svn*"
+- "*.svn/*"
+- /etc/pki/nssdb/key*
+- /etc/pki/nssdb/cert*
+```
 
 #### Logs
 
