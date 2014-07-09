@@ -88,10 +88,30 @@ Pull requests, bug reports, and feature requests are encouraged.
 
 #### Install via github
 
+Mugsy is built and tested on CentOS/RHEL 6.  You can also run mugsy in virtualenv or build it for your environment.
+
+
+Clone and setup virtualenv:
+
 ```
 git clone git@github.com:imsweb/mugsy.git
 virtualenv --no-site-packages mugsy
 cd mugsy && source bin/activate
 pip install -r requirements.txt
+```
+
+After that you can run the daemon from the virtualenv:
+
+```
 python mugsy.py start
+```
+
+building the binary for your system:
+
+```
+python setup.py install
+sudo mkdir -p /var/mugsy
+sudo cp -r build/exe.linux-x86_64-2.6 /var/mugsy/lib    # path varies with kernel version
+# start it!
+/var/mugsy/lib/mugsy start
 ```
