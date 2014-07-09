@@ -1,0 +1,14 @@
+# This file managed by Puppet
+/var/mugsy/logs/* {
+  weekly
+  missingok
+  rotate 52
+  compress
+  delaycompress
+  notifempty
+  create 600 root root
+  sharedscripts
+  postrotate
+      /sbin/service mugsy stop; /usr/bin/killall mugsy; /sbin/service mugsy start
+  endscript
+}

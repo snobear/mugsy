@@ -26,6 +26,7 @@ sudo rm -rf ${packagedir}
 
 echo "Creating packaging directory structure..."
 sudo mkdir -p ${packagedir}/etc/init.d
+sudo mkdir -p ${packagedir}/etc/logrotate.d
 sudo mkdir -p ${packagedir}/var/mugsy
 
 echo "Copying build files to package directory..."
@@ -35,10 +36,11 @@ echo "Copying misc files to package directory..."
 sudo cp config.yml.example ${packagedir}/var/mugsy/
 sudo cp el6/init.sh ${packagedir}/var/mugsy/lib/
 sudo cp el6/mugsy.init.d ${packagedir}/etc/init.d/mugsy
+sudo cp el6/logrotate ${packagedir}/etc/logrotate.d/mugsy
 
 # set strict owner and perms that the rpm package should take on
 sudo chmod 700 ${packagedir} -R
 sudo chown root:root ${packagedir} -R
 
 echo "Packaging into an rpm..."
-sudo /usr/bin/fpm --rpm-use-file-permissions --after-install /var/mugsy/lib/init.sh -s dir -t rpm --package ${HOME} --no-auto-depends -n mugsy -v ${1} -C ${packagedir} var/mugsy/lib/ var/mugsy/config.yml.example etc/init.d/mugsy
+sudo /usr/bin/fpm --rpm-use-file-permissions --after-install /var/mugsy/lib/init.sh -s dir -t rpm --package ${HOME} --no-auto-depends -n mugsy -v ${1} -C ${packagedir} var/mugsy/lib/ var/mugsy/config.yml.example etc/init.d/mugsy etc/logrotate.d/mugsy
