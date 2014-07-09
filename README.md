@@ -79,8 +79,8 @@ ignore_list:
 #### Notes
 
 - inotify is used to detect real-time file changes via [py watchdog](https://pypi.python.org/pypi/watchdog)
-- The list of directories to monitor in the example config should not be considered complete from a security perspective.  You should monitor ALL directories on your system, but this can get noisy.  Please submit an issue to suggest any changes to the default list.
 - Mugsy is a stand-alone executable.  Your system does not need to have python installed for it to run, thanks to [cx_freeze](http://cx-freeze.sourceforge.net/).  So theoretically, mugsy could be built for cross-platform use.
+- The list of directories to monitor in the example config should not be considered complete from a security perspective.  You really should monitor ALL directories on your system.   That can get pretty noisy, so the default list is my attempt at a list of important directories to monitor.   I hope that the community can help build a standard list of "important directories to monitor for changes on linux systems".  Please submit an issue with any suggestions.
 
 #### Contributing
 Pull requests, bug reports, and feature requests are encouraged.
