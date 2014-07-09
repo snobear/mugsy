@@ -35,7 +35,7 @@ sudo cp -r lib/mugsy-${1} ${packagedir}/var/mugsy/lib
 echo "Copying misc files to package directory..."
 sudo cp config.yml.example ${packagedir}/var/mugsy/
 sudo cp el6/init.sh ${packagedir}/var/mugsy/lib/
-sudo cp el6/mugsy.init.d ${packagedir}/etc/init.d/mugsy
+sudo cp el6/init.d ${packagedir}/etc/init.d/mugsy
 sudo cp el6/logrotate ${packagedir}/etc/logrotate.d/mugsy
 
 # set strict owner and perms that the rpm package should take on
