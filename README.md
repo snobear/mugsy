@@ -30,7 +30,7 @@ Start the daemon:
 sudo service mugsy start
 ```
 
-#### Example config
+#### Example config.yml
 
 ```
 # Elasticsearch server
