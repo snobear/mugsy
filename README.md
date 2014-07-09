@@ -3,12 +3,12 @@ mugsy
 
 Mugsy is a file integrity monitor.
 
-It runs as a daemon and any file modifications made to your system are logged locally and also sent to an [elasticsearch](http://www.elasticsearch.org) server.  That means you can use [kibana](http://www.elasticsearch.org/overview/kibana/) as a sweet dashboard to monitor what is changing on your servers, or easily roll your own reports.
+It runs as a daemon and any file modifications made to your system are logged locally and also sent to an [elasticsearch](http://www.elasticsearch.org) server.  That means you can use [kibana](http://www.elasticsearch.org/overview/kibana/) as a sweet dashboard to monitor what is changing on your servers or easily roll your own reports.
 
 #### Install
 
 
-Download the latest rpm from el6/rpms/ and install:
+Download the latest rpm [release](https://github.com/imsweb/mugsy/releases) and install:
 
 ```
 sudo yum install ./mugsy-0.5.10-1.x86_64.rpm
