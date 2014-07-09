@@ -13,16 +13,6 @@ It runs as a daemon and any file modifications made to your system are logged lo
 sudo yum install mugsy
 ```
 
-#### Install via github
-
-```
-git clone git@github.com:imsweb/mugsy.git
-virtualenv --no-site-packages mugsy
-cd mugsy && source bin/activate
-pip install -r requirements.txt
-python mugsy.py start
-```
-
 #### Setup and run
 
 Copy the example config:
@@ -94,3 +84,14 @@ ignore_list:
 
 #### Contributing
 Pull requests, bug reports, and feature requests are encouraged.
+
+
+#### Install via github
+
+```
+git clone git@github.com:imsweb/mugsy.git
+virtualenv --no-site-packages mugsy
+cd mugsy && source bin/activate
+pip install -r requirements.txt
+python mugsy.py start
+```
