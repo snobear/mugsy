@@ -41,6 +41,8 @@ sudo cp el6/logrotate ${packagedir}/etc/logrotate.d/mugsy
 # set strict owner and perms that the rpm package should take on
 sudo chmod 700 ${packagedir} -R
 sudo chown root:root ${packagedir} -R
+sudo chmod 755 ${packagedir}/etc/init.d/mugsy
+sudo chmod 644 ${packagedir}/etc/logrotate.d/mugsy
 
 echo "Packaging into an rpm..."
 sudo /usr/bin/fpm --rpm-use-file-permissions --after-install /var/mugsy/lib/init.sh -s dir -t rpm --package ${HOME} --no-auto-depends -n mugsy -v ${1} -C ${packagedir} var/mugsy/lib/ var/mugsy/config.yml.example etc/init.d/mugsy etc/logrotate.d/mugsy

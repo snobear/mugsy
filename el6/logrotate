@@ -1,4 +1,3 @@
-# This file managed by Puppet
 /var/mugsy/logs/* {
   weekly
   missingok

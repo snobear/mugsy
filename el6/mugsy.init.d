@@ -20,14 +20,23 @@ PROG=mugsy
 
 start() {
     echo -n "Starting $PROG: "
-    daemon --pidfile=$PIDFILE $BINPATH
+    daemon --pidfile=$PIDFILE "$BINPATH start"
+    echo
+    RETVAL=$?
+}
+
+
+start() {
+    echo -n "Restarting $PROG: "
+    daemon --pidfile=$PIDFILE "$BINPATH restart"
     echo
     RETVAL=$?
 }
 
 stop() {
     echo -n "Stopping $PROG: "
-    killproc -p $PIDFILE
+    #killproc -p $PIDFILE
+    daemon --pidfile=$PIDFILE "$BINPATH stop"
     echo
     RETVAL=$?
 }
