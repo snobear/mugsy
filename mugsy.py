@@ -23,6 +23,7 @@ loglevel = {
 }
 
 # special mappings used when creating the index
+# "not+analyzed" will ensure the string won't be split on delimiters
 mapping = {
   "mappings" : {
     "filemeta" : {
@@ -39,6 +40,12 @@ mapping = {
           "omit_norms" : True,
           "index_options" : "docs"
         },
+        "hostname" : {
+          "type" : "string",
+          "index" : "not_analyzed",
+          "omit_norms" : True,
+          "index_options" : "docs"
+        },
       }
     }
   }
@@ -48,12 +55,19 @@ mapping = {
 Handler for each file change event
 '''
 class CustomHandler(PatternMatchingEventHandler):
+
     def __init__(self, *args, **kwargs):
         super(CustomHandler, self).__init__(*args, **kwargs)
 
         # Elasticsearch init
         try:
-            self.es = Elasticsearch(hosts={config['es_host'] : config['es_port'] })
+            if ('http_user' in config) and ('http_pass' in config):
+                self.es = Elasticsearch(hosts=config['es_hosts'],
+                                        http_auth="%s:%s" % (config['http_user'],config['http_pass'])
+                                        )
+            else:
+                self.es = Elasticsearch(hosts=config['es_hosts'])
+
         except Exception, e:
             applog.exception("Error creating elasticsearch connection: %s" % e)
             sys.exit(1)
@@ -116,7 +130,7 @@ class CustomHandler(PatternMatchingEventHandler):
         }
 
         # make sure file exists before attempting stat command
-        # open issue: https://github.com/gorakhargosh/watchdog/issues/205        
+        # open issue: https://github.com/gorakhargosh/watchdog/issues/205
         if event.event_type != 'deleted' and (os.path.exists(event.src_path)):
 
             # get file stats
@@ -152,7 +166,6 @@ class CustomHandler(PatternMatchingEventHandler):
     def log_event(self, doc):
         # log locally
         eventlog.info("event: %s" % doc)
-        applog.info("event being logged...")
 
         # send to ES
         try:
@@ -235,7 +248,7 @@ if __name__ == "__main__":
     try:
         config = yaml.load(file(app_config_file))
     except IOError:
-        sys.exit("config.yml does not exist.  You can copy config.yml.example to config.yml and customize it.")
+        sys.exit("config file %s does not exist.  You can copy config.yml.example to config.yml and customize it." % app_config_file)
 
     app = Mugsy()
 

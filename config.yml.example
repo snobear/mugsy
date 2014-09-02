@@ -1,9 +1,15 @@
 # config.yml 
 # Mugsy configuration
 
-# Elasticsearch server
-es_host: eshost.example.com
-es_port: 9200
+# Elasticsearch servers
+# format is host: port
+es_hosts:
+  ess02-dev.imsweb.com: 9200
+  ess03-dev.imsweb.com: 9200
+
+# basic http auth
+http_user: myuser
+http_pass: mypassword
 
 # Logs
 logdir: /var/mugsy/logs
