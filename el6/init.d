@@ -1,5 +1,4 @@
 #!/bin/sh
-# This file managed by Puppet
 # Linux Standard Base comments
 ### BEGIN INIT INFO
 # Provides:          mugsy
