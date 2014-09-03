@@ -4,12 +4,12 @@
 # Elasticsearch servers
 # format is host: port
 es_hosts:
-  ess02-dev.imsweb.com: 9200
-  ess03-dev.imsweb.com: 9200
+  examplehost01: 9200
+  examplehost02: 9200
 
 # basic http auth
-http_user: myuser
-http_pass: mypassword
+#http_user: myuser
+#http_pass: mypassword
 
 # Logs
 logdir: /var/mugsy/logs

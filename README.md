@@ -11,7 +11,7 @@ It runs as a daemon and any file modifications made to your system are logged lo
 Download the latest rpm [release](https://github.com/imsweb/mugsy/releases) and install:
 
 ```
-sudo yum install ./mugsy-0.5.10-1.x86_64.rpm
+sudo yum install mugsy-1.0.0-1.x86_64.rpm
 ```
 
 #### Setup and run
@@ -22,7 +22,7 @@ Copy the example config:
 sudo cp /var/mugsy/config.yml.example /var/mugsy/config.yml
 ```
 
-At a minimum, you'll need to change the elasticsearch host/port.
+At a minimum, you'll need to change the elasticsearch host settings.
 
 
 Start the daemon:
@@ -34,9 +34,16 @@ sudo service mugsy start
 #### Example config.yml
 
 ```
-# Elasticsearch server
-es_host: eshost.example.com
-es_port: 9200
+# Elasticsearch servers
+# format is host: port
+# add a line for each host in your cluster
+es_hosts:
+  examplehost01: 9200
+  examplehost02: 9200
+
+# basic http auth (optional)
+#http_user: myuser
+#http_pass: mypassword
 
 # Logs
 logdir: /var/mugsy/logs
@@ -66,11 +73,7 @@ ignore_list:
 - "*.swpx"
 - "*.swp"
 - "*.swx"
-- "*.git*"
 - "*.svn*"
-- "*.svn/*"
-- /etc/pki/nssdb/key*
-- /etc/pki/nssdb/cert*
 ```
 
 #### Logs
