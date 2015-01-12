@@ -3,6 +3,7 @@
 
 # Elasticsearch servers
 # format is host: port
+es_logging: true
 es_hosts:
   examplehost01: 9200
   examplehost02: 9200

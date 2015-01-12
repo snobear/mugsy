@@ -11,7 +11,6 @@ from datetime import datetime
 from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
 import hashlib
-from elasticsearch import Elasticsearch
 
 # log level config options and corresponding logging level object
 loglevel = { 
@@ -60,17 +59,20 @@ class CustomHandler(PatternMatchingEventHandler):
         super(CustomHandler, self).__init__(*args, **kwargs)
 
         # Elasticsearch init
-        try:
-            if ('http_user' in config) and ('http_pass' in config):
-                self.es = Elasticsearch(hosts=config['es_hosts'],
-                                        http_auth="%s:%s" % (config['http_user'],config['http_pass'])
-                                        )
-            else:
-                self.es = Elasticsearch(hosts=config['es_hosts'])
-
-        except Exception, e:
-            applog.exception("Error creating elasticsearch connection: %s" % e)
-            sys.exit(1)
+        if config['es_logging']:
+            try:
+                if ('http_user' in config) and ('http_pass' in config):
+                    self.es = Elasticsearch(hosts=config['es_hosts'],
+                                            http_auth="%s:%s" % (
+                                             config['http_user'],
+                                             config['http_pass']
+                                            ))
+                else:
+                    self.es = Elasticsearch(hosts=config['es_hosts'])
+            
+            except Exception, e:
+                applog.exception("Error creating elasticsearch connection: %s" % e)
+                sys.exit(1)
 
     '''
     Get a specified field for a given file via stat command
@@ -161,24 +163,24 @@ class CustomHandler(PatternMatchingEventHandler):
 
     '''
     Log the event
-    Send to Elasticsearch and local log
     ''' 
     def log_event(self, doc):
         # log locally
         eventlog.info("event: %s" % doc)
 
-        # send to ES
-        try:
-            index_name = "mugsy-%s" % datetime.now().strftime('%Y.%m.%d')
-
-            cr = self.es.indices.create(index=index_name, body=mapping, ignore=400)
+        if config['es_logging']:
+            # send to ES
             try:
-                res = self.es.index(index=index_name, doc_type='filemeta', body=doc)
-                applog.debug("log sent to elasticsearch. result : %s" % res)
+                index_name = "mugsy-%s" % datetime.now().strftime('%Y.%m.%d')
+         
+                cr = self.es.indices.create(index=index_name, body=mapping, ignore=400)
+                try:
+                    res = self.es.index(index=index_name, doc_type='filemeta', body=doc)
+                    applog.debug("log sent to elasticsearch. result : %s" % res)
+                except Exception, e:
+                    applog.exception("error sending to elasticsearch server: %s" % e)
             except Exception, e:
-                applog.exception("error sending to elasticsearch server: %s" % e)
-        except Exception, e:
-            applog.exception("Error creating elasticsearch index: %s" % e)
+                applog.exception("Error creating elasticsearch index: %s" % e)
 
 '''
 Main
@@ -274,10 +276,12 @@ if __name__ == "__main__":
     eventlog.addHandler(eh)
     eventlog.setLevel(lvl)
     
-    # set logging handler for elasticsearch module
-    eslog = logging.getLogger('elasticsearch')
-    eslog.addHandler(eh)
-    eslog.setLevel(lvl)
+    # elasticsearch module
+    if config['es_logging']:
+        from elasticsearch import Elasticsearch
+        eslog = logging.getLogger('elasticsearch')
+        eslog.addHandler(eh)
+        eslog.setLevel(lvl)
 
     '''
     Start daemon
