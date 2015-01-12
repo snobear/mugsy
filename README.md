@@ -37,6 +37,7 @@ sudo service mugsy start
 # Elasticsearch servers
 # format is host: port
 # add a line for each host in your cluster
+es_logging: true
 es_hosts:
   examplehost01: 9200
   examplehost02: 9200
