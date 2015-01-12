@@ -59,7 +59,7 @@ class CustomHandler(PatternMatchingEventHandler):
         super(CustomHandler, self).__init__(*args, **kwargs)
 
         # Elasticsearch init
-        if config['es_logging']:
+        if es_logging:
             try:
                 if ('http_user' in config) and ('http_pass' in config):
                     self.es = Elasticsearch(hosts=config['es_hosts'],
@@ -168,7 +168,7 @@ class CustomHandler(PatternMatchingEventHandler):
         # log locally
         eventlog.info("event: %s" % doc)
 
-        if config['es_logging']:
+        if es_logging:
             # send to ES
             try:
                 index_name = "mugsy-%s" % datetime.now().strftime('%Y.%m.%d')
@@ -253,6 +253,11 @@ if __name__ == "__main__":
         sys.exit("config file %s does not exist.  You can copy config.yml.example to config.yml and customize it." % app_config_file)
 
     app = Mugsy()
+    
+    if 'es_logging' in config:
+        es_logging = config['es_logging']
+    else:
+        es_logging = True
 
     '''
     Set up logging
@@ -277,7 +282,7 @@ if __name__ == "__main__":
     eventlog.setLevel(lvl)
     
     # elasticsearch module
-    if config['es_logging']:
+    if es_logging:
         from elasticsearch import Elasticsearch
         eslog = logging.getLogger('elasticsearch')
         eslog.addHandler(eh)
