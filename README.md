@@ -8,10 +8,10 @@ It runs as a daemon and any file modifications made to your system are logged lo
 #### Install
 
 
-Download the latest rpm [release](https://github.com/imsweb/mugsy/releases) and install:
+Install the latest [release](https://github.com/imsweb/mugsy/releases):
 
 ```
-sudo yum install mugsy-1.0.0-1.x86_64.rpm
+sudo yum install https://github.com/imsweb/mugsy/releases/download/1.0.1/mugsy-1.0.1-1.x86_64.rpm
 ```
 
 #### Setup and run
