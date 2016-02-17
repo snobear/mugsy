@@ -1,9 +1,11 @@
 mugsy
 ======
 
-Mugsy is a file integrity monitor.
+Mugsy is a Linux file integrity monitor.
 
-It runs as a daemon and any file modifications made to your system are logged locally and also sent to an [elasticsearch](http://www.elasticsearch.org) server.  That means you can use [kibana](http://www.elasticsearch.org/overview/kibana/) as a sweet dashboard to monitor what is changing on your servers or easily roll your own reports.
+It runs as a daemon and any file modifications made to your system on directories you've specify to monitor are logged locally and optionally sent to your [elasticsearch](http://www.elasticsearch.org) server(s).
+
+If you have mugsy ship your file changes to elasticsearch, you can then easily generate reports with a script (see report/ directory for example report script) or a dashboard such as [kibana](http://www.elasticsearch.org/overview/kibana/).
 
 #### Install
 
@@ -75,6 +77,53 @@ ignore_list:
 - "*.swp"
 - "*.swx"
 - "*.svn*"
+```
+
+#### Reports
+
+***Daily Email report***
+
+Download the `report.py` and `queries.py` scripts found in `report/` in this repo and save to /var/mugsy. Then set up a cron job to fire off a daily report:
+
+```
+# Daily file integrity report [mugsy]
+0 7 * * * /var/mugsy/report.py > /dev/null
+```
+
+Note the daily file integrity email report requires that you are having mugsy ship your logs to elasticsearch.
+
+Of course you can roll your own using the many elasticsearch client libraries or use Kibana as a dashboard to search and visualize.
+
+Example daily report:
+
+```
+Report period: 2016.02.16 to 2016.02.17
+    
+========================
+File changes, all hosts:
+========================
+/etc/
+|- passwd
+|- hosts
+|- ntp.conf
+/etc/foo/foo.conf
+/usr/bin/firefox
+
+========================
+File changes per host:
+========================
+ Count: Hostname            
+    16: es-01        
+    12: es-02        
+    11: webapp-02               
+    11: test04        
+    10: db20          
+    10: mw03               
+    10: mw04               
+     7: webapp-03        
+     6: db04
+     6: somehost05
+Total hosts reporting in: 10
 ```
 
 #### Logs
