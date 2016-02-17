@@ -24,7 +24,7 @@ Copy the example config:
 sudo cp /var/mugsy/config.yml.example /var/mugsy/config.yml
 ```
 
-At a minimum, you'll need to change the elasticsearch host settings.
+You'll want to change the elasticsearch host settings if you want your change events sent to elasticsearch.
 
 
 Start the daemon:
