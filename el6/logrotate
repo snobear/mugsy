@@ -1,4 +1,4 @@
-/var/mugsy/logs/* {
+/var/mugsy/logs/*.log {
   weekly
   missingok
   rotate 52
@@ -8,6 +8,6 @@
   create 600 root root
   sharedscripts
   postrotate
-      kill -HUP `cat /var/run/mugsy.pid`; /sbin/service mugsy start
+      /sbin/service mugsy stop; /usr/bin/killall mugsy; /sbin/service mugsy start
   endscript
 }
