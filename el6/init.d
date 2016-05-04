@@ -14,27 +14,27 @@
 
 . /etc/init.d/functions
 
+PROG=mugsy
 BINPATH=/var/mugsy/lib/mugsy
 PIDFILE=/var/run/mugsy.pid
-PROG=mugsy
 
 start() {
     echo -n "Starting $PROG: "
-    daemon "$BINPATH start"
+    daemon "${BINPATH} start > /dev/null"
     echo
     RETVAL=$?
 }
 
 stop() {
     echo -n "Stopping $PROG: "
-    daemon "$BINPATH stop"
+    daemon "${BINPATH} stop > /dev/null"
     echo
     RETVAL=$?
 }
 
 restart() {
     echo -n "Restarting $PROG: "
-    daemon "$BINPATH restart"
+    daemon "${BINPATH} restart > /dev/null" 
     echo
     RETVAL=$?
 }
