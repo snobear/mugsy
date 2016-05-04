@@ -13,7 +13,7 @@ If you have mugsy ship your file changes to elasticsearch, you can then easily g
 Install the latest [release](https://github.com/imsweb/mugsy/releases):
 
 ```
-sudo yum install https://github.com/imsweb/mugsy/releases/download/1.0.1/mugsy-1.0.1-1.x86_64.rpm
+sudo yum install https://github.com/imsweb/mugsy/releases/download/1.0.2/mugsy-1.0.2-1.x86_64.rpm
 ```
 
 #### Setup and run
