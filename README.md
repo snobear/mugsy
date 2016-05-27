@@ -44,11 +44,11 @@ es_hosts:
   examplehost01: 9200
   examplehost02: 9200
 
-# basic http auth (optional)
+# elasticsearch authentication (optional)
 #http_user: myuser
 #http_pass: mypassword
 
-# Logs
+# Local logging (for file changes and for Mugsy's application logs)
 logdir: /var/mugsy/logs
 loglevel: info
 
