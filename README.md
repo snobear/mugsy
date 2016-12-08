@@ -7,6 +7,8 @@ It runs as a daemon and any file modifications made to your system on directorie
 
 If you have mugsy ship your file changes to elasticsearch, you can then easily generate reports with a script (see report/ directory for example report script) or a dashboard such as [kibana](http://www.elasticsearch.org/overview/kibana/).
 
+Compatible with Elasticsearch 1.x and 2.x. (might work on 5.x but haven't tried it yet).
+
 #### Install
 
 
