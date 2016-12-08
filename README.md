@@ -1,4 +1,4 @@
-mugsy
+Mugsy
 ======
 
 Mugsy is a Linux file integrity monitor.
@@ -9,7 +9,7 @@ If you have mugsy ship your file changes to elasticsearch, you can then easily g
 
 Compatible with Elasticsearch 1.x and 2.x. (might work on 5.x but haven't tried it yet).
 
-#### Install
+## Install
 
 
 Install the latest [release](https://github.com/imsweb/mugsy/releases):
@@ -18,7 +18,7 @@ Install the latest [release](https://github.com/imsweb/mugsy/releases):
 sudo yum install https://github.com/imsweb/mugsy/releases/download/1.0.2/mugsy-1.0.2-1.x86_64.rpm
 ```
 
-#### Setup and run
+## Setup and run
 
 Copy the example config:
 
@@ -35,7 +35,9 @@ Start the daemon:
 sudo service mugsy start
 ```
 
-#### Example config.yml
+## Example Config
+
+config.yml
 
 ```
 # Elasticsearch servers
@@ -81,7 +83,7 @@ ignore_list:
 - "*.svn*"
 ```
 
-#### Reports
+## Reports
 
 ***Daily Email report***
 
