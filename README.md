@@ -12,11 +12,13 @@ Compatible with Elasticsearch 1.x and 2.x. (might work on 5.x but haven't tried 
 ## Install
 
 
-Install the latest [release](https://github.com/imsweb/mugsy/releases):
+Install the latest [release](https://github.com/imsweb/mugsy/releases) on CentOS/Redhat:
 
 ```
 sudo yum install https://github.com/imsweb/mugsy/releases/download/1.0.2/mugsy-1.0.2-1.x86_64.rpm
 ```
+
+Sorry, no .deb builds available, but you can build it yourself. See bottom of README.
 
 ## Setup and run
 
